@@ -11,11 +11,36 @@ public class Game {
         while (true) {
             printTable();
             input();
-            ox.put(col,row);
+            if(ox.checkWin(col,row)) {
+                printTable();
+                printWin();
+                System.out.println("X win : " + ox.getScoreX());
+                System.out.println("O win : " + ox.getScoreO());
+                System.out.println("Draw : " + ox.getScoreDraw());
+                ox.reset();
+                continue;
+            }
+            if(ox.isDraw()) {
+                printTable();
+                printDraw();
+                System.out.println("X win : " + ox.getScoreX());
+                System.out.println("O win : " + ox.getScoreO());
+                System.out.println("Draw : " + ox.getScoreDraw());
+                ox.reset();
+                continue;
+            }
             ox.switchPlayer();
 
 
         }
+    }
+
+    private static void printDraw() {
+        System.out.println("Draw");
+    }
+
+    private static void printWin() {
+        System.out.println(ox.getCurrentPlayer() + " " + "Win");
     }
 
     private static void input() {
